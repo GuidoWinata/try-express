@@ -1,0 +1,8 @@
+{
+  "auto-close-tag.disableOnLanguage": [],
+  "python.analysis.diagnosticSeverityOverrides": {},
+  "editor.formatOnSave": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}
