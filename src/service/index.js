@@ -5,16 +5,39 @@ const app = express();
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+app.use(express.json());
 
-app.get('/api', (req, res) => {
+const PORT = process.env.PORT;
+const router = express.Router();
+
+router.get('/api', (req, res) => {
   res.send('Hello World');
 });
 
-app.get('/barang', async (req, res) => {
+router.get('/barang', async (req, res) => {
   const barang = await client.barang.findMany();
   res.json(barang);
 });
+
+router.post('/create', async (req, res) => {
+  try {
+    const barang = req.body;
+
+    await client.barang.create({
+      data: {
+        nama: barang.nama,
+        harga: barang.harga,
+        jenis: barang.jenis,
+        deskripsi: barang.jenis,
+      },
+    });
+  } catch (error) {
+    console.error();
+  }
+});
+
+app.use('/api', router);
+
 app.listen(PORT, () => {
   console.log('server listen to PORT:', PORT);
 });
